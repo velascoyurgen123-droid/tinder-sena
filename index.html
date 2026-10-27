@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tinder de intereses y objetos personales para el proyecto del SENA.">
+  <title>Match de Intereses | SENA</title>
+  <link rel="stylesheet" href="css/styles.css?v=20261027-6">
+</head>
+<body>
+  <div class="phone-shell">
+  <div class="status-bar" aria-hidden="true"><span>9:41</span><span>● ● ▰</span></div>
+  <header class="site-header">
+    <a class="brand" href="index.html">Match de Intereses</a>
+    <nav aria-label="Navegación principal">
+      <a href="#discover">🔥 Intereses</a>
+      <a href="#explore">🧭 Explorar</a>
+      <a href="#likes">⭐ Likes</a>
+      <a href="#matches">💛 Matches</a>
+      <a href="#messages">💬 Mensajes</a>
+      <a href="#profile">👤 Perfil</a>
+      <a href="#settings">⚙️</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero app-view" id="sobre-proyecto" data-view="discover" aria-hidden="true"></section>
+
+    <section class="profiles-section app-view" id="perfiles" data-view="discover" aria-labelledby="profiles-title">
+      <div class="section-heading">
+        <p class="eyebrow">Descubre</p>
+        <h2 id="profiles-title">Descubrir perfiles</h2>
+      </div>
+
+      <div id="profile-card" class="profile-card" aria-live="polite">
+        <!-- El perfil se cargará desde js/app.js -->
+      </div>
+
+      <div class="actions" aria-label="Acciones del perfil">
+        <button class="action-button action-button--rewind" id="rewind-button" type="button" aria-label="Deshacer última decisión">↩</button>
+        <button class="action-button action-button--pass" id="pass-button" type="button" aria-label="Pasar perfil">✕</button>
+        <button class="action-button action-button--super-like" id="super-like-button" type="button" aria-label="Super like">★</button>
+        <button class="action-button action-button--like" id="like-button" type="button" aria-label="Me interesa este perfil">♥</button>
+        <button class="action-button action-button--boost" id="boost-button" type="button" aria-label="Activar Boost">⚡</button>
+      </div>
+      <div class="secondary-actions">
+        <button id="report-button" type="button">Reportar</button>
+        <button id="block-button" type="button">Bloquear</button>
+      </div>
+      <p id="feedback" class="feedback" role="status"></p>
+    </section>
+
+    <section class="module-section app-view" data-view="explore" aria-labelledby="explore-title">
+      <div class="section-heading"><p class="eyebrow">Descubre algo nuevo</p><h2 id="explore-title">Explorar intereses</h2></div>
+      <div id="explore-list" class="explore-list"></div>
+    </section>
+
+    <section class="module-section app-view" data-view="likes" aria-labelledby="likes-title">
+      <div class="section-heading"><p class="eyebrow">Personas interesadas</p><h2 id="likes-title">Likes recibidos</h2></div>
+      <div class="empty-module">Aquí aparecerán los likes recibidos. En esta versión frontend se muestran como datos de prueba.</div>
+    </section>
+
+    <section class="matches-section app-view" id="matches" data-view="matches" aria-labelledby="matches-title">
+      <div class="section-heading">
+        <p class="eyebrow">Tus conexiones</p>
+        <h2 id="matches-title">Matches</h2>
+      </div>
+      <div id="matches-list" class="matches-list" aria-live="polite"></div>
+      <button id="clear-data-button" class="clear-data-button" type="button">Limpiar mis decisiones</button>
+    </section>
+
+    <section class="profile-editor app-view" id="mi-perfil" data-view="profile" aria-labelledby="my-profile-title">
+      <div class="section-heading">
+        <p class="eyebrow">Personaliza</p>
+        <h2 id="my-profile-title">Mi perfil</h2>
+      </div>
+      <form id="profile-form" class="profile-form">
+        <label>Nombre <input name="name" type="text" maxlength="40" required></label>
+        <label>Edad <input name="age" type="number" min="18" max="100" required></label>
+        <label>Ciudad <input name="city" type="text" maxlength="40" required></label>
+        <label>Categoría <input name="category" type="text" maxlength="30" required></label>
+        <label>Descripción <textarea name="description" maxlength="180" required></textarea></label>
+        <label>Intereses <input name="interests" type="text" placeholder="Música, lectura, deporte" required></label>
+        <label>URL de imagen <input name="image" type="url" placeholder="https://ejemplo.com/mi-foto.jpg"></label>
+        <button class="save-profile-button" type="submit">Guardar perfil</button>
+        <p id="profile-form-feedback" class="form-feedback" role="status"></p>
+      </form>
+      <div id="my-profile-preview" class="profile-preview"></div>
+    </section>
+
+    <section class="chat-section app-view" id="chat" data-view="messages" aria-labelledby="chat-title" hidden>
+      <div class="section-heading">
+        <p class="eyebrow">Conversación</p>
+        <h2 id="chat-title">Chat</h2>
+      </div>
+      <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
+      <form id="chat-form" class="chat-form">
+        <label class="visually-hidden" for="chat-input">Escribe un mensaje</label>
+        <input id="chat-input" name="message" type="text" maxlength="300" placeholder="Escribe un mensaje..." required>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+
+    <section class="module-section app-view" data-view="settings" aria-labelledby="settings-title">
+      <div class="section-heading"><p class="eyebrow">Preferencias</p><h2 id="settings-title">Configuración</h2></div>
+      <div class="settings-card">
+        <p>Todos tus datos se guardan solamente en este navegador.</p>
+        <button id="reset-app-button" class="clear-data-button" type="button">Reiniciar aplicación</button>
+        <p id="settings-feedback" class="form-feedback" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Proyecto académico · SENA</p>
+  </footer>
+
+  <nav class="bottom-nav" aria-label="Navegación inferior">
+    <a href="#discover" aria-label="Descubrir"><span>♥</span><small>Descubrir</small></a>
+    <a href="#explore" aria-label="Explorar"><span>▦</span><small>Explorar</small></a>
+    <a href="#likes" aria-label="Likes"><span>★</span><small>Likes</small></a>
+    <a href="#matches" aria-label="Matches"><span>☷</span><small>Matches</small></a>
+    <a href="#messages" aria-label="Mensajes"><span>✉</span><small>Mensajes</small></a>
+    <a href="#profile" aria-label="Perfil"><span>●</span><small>Perfil</small></a>
+  </nav>
+
+  <script type="module" src="js/app.js?v=20261027-6"></script>
+  </div>
+</body>
+</html>
